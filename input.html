@@ -1,154 +1,97 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Input Surat Masuk</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-        }
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background-color: #fff;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        .container:hover {
-            transform: scale(1.02);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #4CAF50;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], input[type="date"], textarea {
-            margin-bottom: 15px;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-            transition: border 0.3s;
-        }
-        input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        textarea {
-            resize: vertical;
-        }
-        button {
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-        .btn-warning {
-            background-color: #ffc107;
-            color: #333;
-        }
-        .btn-warning:hover {
-            background-color: #e0a800;
-        }
-        #responseMessage {
-            text-align: center;
-            margin-top: 15px;
-            color: #28a745;
-            font-weight: bold;
-            visibility: hidden; /* Sembunyikan pesan respons awal */
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Form Input Surat Masuk</h2>
-    <form method="post" id="suratForm" action="https://script.google.com/macros/s/AKfycbz5zr7NcMpijV0s4FBSQAnLV5NmYwek9utI0I8dOQZI63cx4mLh7-NvKbVEZwLu4vJ2/execc">
-
-        <label for="nomor_surat">Nomor</label>
-        <input type="text" id="nomor_surat" name="nomor" required>
-
-        <label for="alamat_pengirim">Alamat Pengirim</label>
-        <input type="text" id="alamat_pengirim" name="alamat_pengirim" required>
-
-        <label for="nomor_surat">Nomor Surat</label>
-        <input type="text" id="nomor_surat" name="nomor_surat" required>
-
-        <label for="tanggal">Tanggal</label>
-        <input type="date" id="tanggal" name="tanggal" required>
-
-        <label for="perihal">Perihal</label>
-        <input type="text" id="perihal" name="perihal" required>
-
-        <label for="keterangan">Keterangan</label>
-        <textarea id="keterangan" name="keterangan" rows="4" required></textarea>
-
-        <div class="button-group">
-            <a href="index.html"><button type="button" class="btn-secondary" >Kembali</button></a>
-            <button type="submit">Simpan</button>
-            <button type="button" class="btn-warning" onclick="editForm()">Edit</button>
-        </div>
-    </form>
-
-    <p id="responseMessage"></p>
-</div>
-
-<script>
-    function editForm() {
-        const formElements = document.querySelectorAll("#suratForm input, #suratForm textarea");
-        formElements.forEach(element => {
-            element.removeAttribute("readonly");
-            element.style.backgroundColor = "#fff";
-        });
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Surat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    // Menampilkan pesan respons setelah submit (opsional)
-    document.getElementById('suratForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Mencegah submit untuk demonstrasi
-        document.getElementById('responseMessage').innerText = "Data berhasil disimpan!";
-        document.getElementById('responseMessage').style.visibility = "visible"; // Tampilkan pesan
-    });
-</script>
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
 
+    h2 {
+      text-align: center;
+      color: #4A90E2;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus {
+      border-color: #4A90E2;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #357ABD;
+    }
+
+    ::placeholder {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .back-btn {
+      background-color: #bbb;
+      margin-top: 10px;
+    }
+
+    .back-btn:hover {
+      background-color: #999;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbz2s1YdlZ56y4De2Q9dA5XzQ2zZkbP8fWDg4q_J1PhpHHNbKuaRR630t1RwavO8c0r3/exec">
+    <h2>Masukkan Surat DISPERINDAGESDM</h2>
+    <input name="nomor" type="number" placeholder="Nomor" required>
+    <input name="alamat pengirim" type="text" placeholder="Alamat Pengirim" required>
+    <input name="nomor surat" type="text" placeholder="Nomor Surat" required>
+    <input name="tanggal" type="date" placeholder="Tanggal" required>
+    <input name="perihal" type="text" placeholder="Perihal" required>
+    <input name="keterangan" type="text" placeholder="Keterangan" required>
+    <button type="submit">Send</button>
+    <button type="button" class="back-btn" onclick="window.history.back();">Kembali</button>
+  </form>
 </body>
 </html>

@@ -82,16 +82,27 @@
   </style>
 </head>
 <body>
-  <form method="POST" action="https://script.google.com/macros/s/AKfycbz2s1YdlZ56y4De2Q9dA5XzQ2zZkbP8fWDg4q_J1PhpHHNbKuaRR630t1RwavO8c0r3/exec">
+  <form name="submit-to-google-sheet">
     <h2>Masukkan Surat DISPERINDAGESDM</h2>
-    <input name="nomor" type="number" placeholder="Nomor" required>
-    <input name="alamat pengirim" type="text" placeholder="Alamat Pengirim" required>
-    <input name="nomor surat" type="text" placeholder="Nomor Surat" required>
-    <input name="tanggal" type="date" placeholder="Tanggal" required>
-    <input name="perihal" type="text" placeholder="Perihal" required>
-    <input name="keterangan" type="text" placeholder="Keterangan" required>
+    <input name="Nomor" type="number" placeholder="Nomor" required>
+    <input name="Alamat Pengirim" type="text" placeholder="Alamat Pengirim" required>
+    <input name="Nomor Surat" type="text" placeholder="Nomor Surat" required>
+    <input name="Tanggal" type="date" placeholder="Tanggal" required>
+    <input name="Perihal" type="text" placeholder="Perihal" required>
+    <input name="Keterangan" type="text" placeholder="Keterangan" required>
     <button type="submit">Send</button>
     <button type="button" class="back-btn" onclick="window.history.back();">Kembali</button>
   </form>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyArzyT2WzUAW5BqgblhE_2JtqHJaZCk_309PCb-w9p4SlGF2Ie1hh2mFrw62T73psq9A/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>
 </html>

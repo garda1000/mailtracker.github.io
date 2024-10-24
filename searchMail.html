@@ -2,157 +2,99 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Data Surat</title>
-    <!-- Icon -->
-    <link
-      rel="icon"
-      href="https://easy-data.mdbgo.io/img/favicon/favicon-32x32.png"
-      type="image/x-icon"
-    />
-    <!-- Font Awesome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
-    <!-- Google Fonts Roboto -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css"
     />
-    <!-- MDB UI KIT -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
-    <!-- Custom styles -->
-    <style>
-      body {
-        padding-right: 6%;
-        padding-left: 6%;
-      }
-      table {
-        margin-top: 30px;
-      }
-      th,
-      td {
-        text-align: center;
-        vertical-align: middle;
-      }
-      /* .back-btn {
-        width: 100px;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-
-      .back-btn:hover {
-        background-color: #3e8e41;
-      } */
-    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"
+    />
+    <title>Daftar Mahasiswa</title>
   </head>
-
-  <body>
-    <button type="button" class="btn btn-success" onclick="window.history.back();">Kembali</button>
-
-    <!--Main Navigation-->
-    <header class="mb-10">
-      <!-- Navbar-->
-      <!-- Navbar -->
-    </header>
-    <!--Main Navigation-->
-
-    <!--Main layout-->
-    <main>
-      <div class="container">
-        <!-- Table -->
-        <table class="table table-striped table-bordered table-hover">
-          <thead id="table-head" class="thead-dark"></thead>
-          <tbody id="table-body"></tbody>
-        </table>
-        <!-- Table -->
+  <body">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3 class="text-center mb-4">Daftar Mahasiswa</h3>
+          <h4 class="text-center mb-4" id="packageName"></h4>
+          <br>
+          <br>
+          <a href="input.html" type="button" class="btn btn-primary mt-3 mb-3">+ Tambah Mahasiswa</a>
+          <br>
+          <br>
+          <table
+            id="example"
+            class="table table-striped table-bordered mt-2 mb-2"
+            style="width: 100%"
+          ></table>
+          <br />
+          <br />
+          <p id="passingGrade"></p>
+        </div>
       </div>
-    </main>
-    <!--Main layout-->
-
-    <!--Footer-->
-    <footer></footer>
-    <!--Footer-->
-  </body>
-
-  <!-- MDB ESSENTIAL -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <!-- Google API -->
-  <script src="https://apis.google.com/js/api.js"></script>
-  <!-- easyData -->
-  <script type="text/javascript" src="js/easyData-google-sheets.js"></script>
-
-  <!-- easyData - Creating table -->
-  <script>
-    {
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.0/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script type="text/javascript" src="data.json"></script> -->
+    <script type="text/javascript">
+       $(document).ready(function () {
+    $("#example").DataTable({
+      ajax: "https://script.google.com/macros/s/AKfycbzgNIA-0Gl47F2r7V9tV38SGWn4sDkybgYdhaqIqg2VGp0d3CDCTvddFL2Yrn_IOTiZhQ/exec",
+      columns: [
       {
-        // Your API KEY
-        const API_KEY = "AIzaSyBmRIiGFr5HcKpbH9I3YaEHnEmw2yqUe68";
-
-        function displayResult2(response) {
-          let tableHead = "";
-          let tableBody = "";
-
-          response.result.values.forEach((row, index) => {
-            if (index === 0) {
-              tableHead += "<tr>";
-              row.forEach((val) => (tableHead += "<th>" + val + "</th>"));
-              tableHead += "<th>Actions</th>"; // Add "Actions" header in table head
-              tableHead += "</tr>";
-            } else {
-              tableBody += "<tr>";
-              row.forEach((val) => (tableBody += "<td>" + val + "</td>"));
-              tableBody +=
-                "<td><button class='btn btn-warning btn-sm' onclick='editRow(" + index + ")'>Edit</button> " +
-                "<button class='btn btn-danger btn-sm' onclick='deleteRow(" + index + ")'>Delete</button></td>"; // Add "Edit" and "Delete" buttons
-              tableBody += "</tr>";
-            }
-          });
-
-          document.getElementById("table-head").innerHTML = tableHead;
-          document.getElementById("table-body").innerHTML = tableBody;
-        }
-
-        function loadData() {
-          // Spreadsheet ID
-          const spreadsheetId = "1m8CfSLOtYUYkc_JMyLR0kUXjv3SLJwSKA5Cmh3GZzFA";
-          const range = "A:Z";
-          getPublicValues({ spreadsheetId, range }, displayResult2);
-        }
-
-        window.addEventListener("load", (e) => {
-          initOAuthClient({ apiKey: API_KEY });
-        });
-
-        document.addEventListener("gapi-loaded", (e) => {
-          loadData();
-        });
-
-        // Define the editRow function for handling the edit action
-        function editRow(index) {
-          alert("Editing row: " + index);
-          // Add your edit logic here
-        }
-
-        // Define the deleteRow function for handling the delete action
-        function deleteRow(index) {
-          if (confirm("Are you sure you want to delete this row?")) {
-            alert("Deleting row: " + index);
-            // Add your delete logic here
-          }
-        }
-      }
-    }
-  </script>
+          title: "Last Update",
+          data: "Last Update",
+        },
+        {
+          title: "Nomor",
+          data: "Nomor",
+        },
+        {
+          title: "Alamat Pengirim",
+          data: "Alamat Pengirim",
+        },
+        {
+          data: "Nomor Surat",
+          title: "Nomor Surat",
+        },
+        {
+          data: "Tanggal",
+          title: "Tanggal",
+        },
+        {
+          data: "Perihal",
+          title: "Perihal",
+        },
+        {
+          data: "Keterangan",
+          title: "Keterangan",
+        },
+       
+      ],
+      rowId: "nim",
+      liveAjax: true,
+    });
+  });
+    </script>
+  </body>
 </html>

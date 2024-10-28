@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
     <title>Daftar Mahasiswa</title>
-  </head>
-  <body">
+</head>
+<body>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <h3 class="text-center mb-4">Daftar Mahasiswa</h3>
-          <h4 class="text-center mb-4" id="packageName"></h4>
-          <br>
-          <br>
-          <a href="input.html" type="button" class="btn btn-primary mt-3 mb-3">+ Tambah Mahasiswa</a>
-          <br>
-          <br>
-          <table
-            id="example"
-            class="table table-striped table-bordered mt-2 mb-2"
-            style="width: 100%"
-          ></table>
-          <br />
-          <br />
-          <p id="passingGrade"></p>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-center mb-4">Daftar Mahasiswa</h3>
+                <h4 class="text-center mb-4" id="packageName"></h4>
+                <a href="input.html" class="btn btn-primary mt-3 mb-3">+ Tambah Mahasiswa</a>
+                <table id="example" class="table table-striped table-bordered" style="width: 100%"></table>
+                <p id="passingGrade"></p>
+            </div>
         </div>
-      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -55,42 +29,79 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- <script type="text/javascript" src="data.json"></script> -->
     <script type="text/javascript">
-       $(document).ready(function () {
-    $("#example").DataTable({
-      ajax: "https://script.google.com/macros/s/AKfycbzgNIA-0Gl47F2r7V9tV38SGWn4sDkybgYdhaqIqg2VGp0d3CDCTvddFL2Yrn_IOTiZhQ/exec",
-      columns: [
-      {
-          title: "Nomor",
-          data: "Nomor",
-        },
-        {
-          title: "Alamat Pengirim",
-          data: "Alamat Pengirim",
-        },
-        {
-          data: "Nomor Surat",
-          title: "Nomor Surat",
-        },
-        {
-          data: "Tanggal",
-          title: "Tanggal",
-        },
-        {
-          data: "Perihal",
-          title: "Perihal",
-        },
-        {
-          data: "Keterangan",
-          title: "Keterangan",
-        },
-       
-      ],
-      rowId: "nim",
-      liveAjax: true,
-    });
-  });
+        $(document).ready(function () {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzgNIA-0Gl47F2r7V9tV38SGWn4sDkybgYdhaqIqg2VGp0d3CDCTvddFL2Yrn_IOTiZhQ/exec'; // Ganti dengan URL Google Apps Script Anda
+
+            $("#example").DataTable({
+                ajax: scriptURL,
+                columns: [
+                    { title: "Nomor", data: "Nomor" },
+                    { title: "Alamat Pengirim", data: "Alamat Pengirim" },
+                    { title: "Nomor Surat", data: "Nomor Surat" },
+                    { title: "Tanggal", data: "Tanggal" },
+                    { title: "Perihal", data: "Perihal" },
+                    { title: "Keterangan", data: "Keterangan" },
+                    {
+                        title: "Aksi",
+                        data: null,
+                        render: function (data, type, row) {
+                            return `
+                                <button class="btn btn-warning btn-edit" data-id="${row.Nomor}">Edit</button>
+                                <button class="btn btn-danger btn-delete" data-id="${row.Nomor}">Hapus</button>
+                            `;
+                        },
+                    },
+                ],
+            });
+
+            // Event handler untuk tombol Edit
+            $('#example').on('click', '.btn-edit', function () {
+                const id = $(this).data('id');
+                alert('Edit data dengan ID: ' + id);
+            });
+
+            // Event handler untuk tombol Hapus
+            $('#example').on('click', '.btn-delete', function () {
+                const id = $(this).data('id');
+                swal({
+                    title: "Apakah Anda yakin?",
+                    text: "Data ini akan dihapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        // Kirim permintaan ke Google Apps Script untuk menghapus data
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                action: 'delete', // Menentukan tindakan yang dilakukan
+                                id: id // ID baris yang ingin dihapus
+                            })
+                        })
+                        .then(response => response.json()) // Parse JSON dari respons
+                        .then(result => {
+                            if (result.result === 'success') {
+                                swal("Data telah berhasil dihapus!", { icon: "success" });
+                                $('#example').DataTable().ajax.reload(); // Refresh data setelah penghapusan
+                            } else {
+                                swal("Gagal menghapus data: " + result.message, { icon: "error" });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            swal("Gagal menghapus data", { icon: "error" });
+                        });
+                    } else {
+                        swal("Data Anda aman!");
+                    }
+                });
+            });
+        });
     </script>
-  </body>
+</body>
 </html>

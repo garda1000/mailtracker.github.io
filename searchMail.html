@@ -73,25 +73,29 @@
                 }).then((willDelete) => {
                     if (willDelete) {
                         // Kirim permintaan ke Google Apps Script untuk menghapus data
-                        fetch(scriptURL, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ id: id }),
-                            mode: 'no-cors'  // Atur ke no-cors untuk menghindari error CORS sementara
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            swal("Data telah berhasil dihapus!", { icon: "success" });
-                            $('#example').DataTable().ajax.reload(); // Refresh data setelah penghapusan
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            swal("Gagal menghapus data", { icon: "error" });
-                        });
+                        fetch("https://cors-anywhere.herokuapp.com/" + scriptURL, {
+                              method: 'POST',
+                              headers: {
+                                  'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({ id: id }),
+                              mode: 'cors'
+                          })
+                          .then(response => {
+                              if (!response.ok) {
+                                  throw new Error('Network response was not ok ' + response.statusText);
+                              }
+                              return response.json();
+                          })
+                          .then(result => {
+                              swal("Data telah berhasil dihapus!", { icon: "success" });
+                              $('#example').DataTable().ajax.reload();
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              swal("Gagal menghapus data", { icon: "error" });
+                          });
+
 
                     } else {
                         swal("Data Anda aman!");

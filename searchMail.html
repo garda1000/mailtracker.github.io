@@ -78,24 +78,21 @@
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({
-                                action: 'delete', // Menentukan tindakan yang dilakukan
-                                id: id // ID baris yang ingin dihapus
-                            })
+                            body: JSON.stringify({ id: id }),
+                            mode: 'no-cors'  // Atur ke no-cors untuk menghindari error CORS sementara
                         })
-                        .then(response => response.json()) // Parse JSON dari respons
-                        .then(result => {
-                            if (result.result === 'success') {
-                                swal("Data telah berhasil dihapus!", { icon: "success" });
-                                $('#example').DataTable().ajax.reload(); // Refresh data setelah penghapusan
-                            } else {
-                                swal("Gagal menghapus data: " + result.message, { icon: "error" });
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
                             }
+                            swal("Data telah berhasil dihapus!", { icon: "success" });
+                            $('#example').DataTable().ajax.reload(); // Refresh data setelah penghapusan
                         })
                         .catch(error => {
                             console.error('Error:', error);
                             swal("Gagal menghapus data", { icon: "error" });
                         });
+
                     } else {
                         swal("Data Anda aman!");
                     }

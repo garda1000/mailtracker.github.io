@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
     <title>Daftar Mahasiswa</title>
+    <style>
+        /* Custom styles can be added here */
+        body {
+            padding: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -22,6 +31,7 @@
             </div>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
@@ -29,11 +39,13 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <script type="text/javascript">
         $(document).ready(function () {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzgNIA-0Gl47F2r7V9tV38SGWn4sDkybgYdhaqIqg2VGp0d3CDCTvddFL2Yrn_IOTiZhQ/exec'; // Ganti dengan URL Google Apps Script Anda
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzgNIA-0Gl47F2r7V9tV38SGWn4sDkybgYdhaqIqg2VGp0d3CDCTvddFL2Yrn_IOTiZhQ/exec';
 
-            $("#example").DataTable({
+            // Initialize DataTable
+            const table = $("#example").DataTable({
                 ajax: scriptURL,
                 columns: [
                     { title: "Nomor", data: "Nomor" },
@@ -55,13 +67,14 @@
                 ],
             });
 
-            // Event handler untuk tombol Edit
+            // Event handler for Edit button
             $('#example').on('click', '.btn-edit', function () {
                 const id = $(this).data('id');
                 alert('Edit data dengan ID: ' + id);
+                // Ideally, redirect to an edit page or show a modal for editing
             });
 
-            // Event handler untuk tombol Hapus
+            // Event handler for Delete button
             $('#example').on('click', '.btn-delete', function () {
                 const id = $(this).data('id');
                 swal({
@@ -73,30 +86,27 @@
                 }).then((willDelete) => {
                     if (willDelete) {
                         // Kirim permintaan ke Google Apps Script untuk menghapus data
-                        fetch("https://cors-anywhere.herokuapp.com/" + scriptURL, {
-                              method: 'POST',
-                              headers: {
-                                  'Content-Type': 'application/json',
-                              },
-                              body: JSON.stringify({ id: id }),
-                              mode: 'cors'
-                          })
-                          .then(response => {
-                              if (!response.ok) {
-                                  throw new Error('Network response was not ok ' + response.statusText);
-                              }
-                              return response.json();
-                          })
-                          .then(result => {
-                              swal("Data telah berhasil dihapus!", { icon: "success" });
-                              $('#example').DataTable().ajax.reload();
-                          })
-                          .catch(error => {
-                              console.error('Error:', error);
-                              swal("Gagal menghapus data", { icon: "error" });
-                          });
-
-
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ id: id })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            swal("Data telah berhasil dihapus!", { icon: "success" });
+                            $('#example').DataTable().ajax.reload();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            swal("Gagal menghapus data", { icon: "error" });
+                        });
                     } else {
                         swal("Data Anda aman!");
                     }

@@ -24,12 +24,13 @@ $(document).ready(function () {
   });
 
   function lihatDetail(keterangan) {
-      // Encode the keterangan to make it URL-safe
-      const encodedKeterangan = encodeURIComponent(keterangan);
-      
-      // Set src for the iframe to load an external HTML file with query parameter
-      document.getElementById("modalIframe").src = "FlowSurat.html?keterangan=" + encodedKeterangan;
+    // Simpan keterangan di session storage
+    sessionStorage.setItem("keterangan", keterangan);
+    
+    // Set src untuk iframe tanpa parameter
+    document.getElementById("modalIframe").src = "FlowSurat.html";
+    console.log(keterangan)
+    // Tampilkan modal
+    $("#suratModal").modal("show");
+}
 
-      // Show modal
-      $("#suratModal").modal("show");
-  }

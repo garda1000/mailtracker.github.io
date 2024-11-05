@@ -28,7 +28,7 @@ $(document).ready(function () {
       const encodedKeterangan = encodeURIComponent(keterangan);
       
       // Set src for the iframe to load an external HTML file with query parameter
-      document.getElementById("modalIframe").src = "flowSurat.html?keterangan=" + encodedKeterangan;
+      document.getElementById("modalIframe").src = "FlowSurat.html?keterangan=" + encodedKeterangan;
 
       // Show modal
       $("#suratModal").modal("show");

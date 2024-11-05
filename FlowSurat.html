@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conditional Input Enable</title>
+    <title>Tracking Surat</title>
+    <link rel="shortcut icon" href="src/11683680803.png" type="image/x-icon">
+    <link rel="stylesheet" href="styleFlow.css">
 </head>
 <body>
-    <form id="myForm" onsubmit="return enableSpecificInput()">
-        <label for="name">Nama:</label>
-        <input type="text" id="name" required><br><br>
+    <div class="tracking-container">
+        <h2>Tracking Status Surat</h2>
 
-        <label for="age">Umur:</label>
-        <input type="number" id="age" required><br><br>
+        <!-- Zigzag tracking with connected lines -->
+        <div class="step-container step-left">
+            <div class="step completed">Diterima<br><small>Surat diterima oleh bagian administrasi</small></div>
+            <div class="line"></div>
+            <div class="circle circle-bottom"></div>
+        </div>
+        
+        <div class="step-container step-right">
+            <div class="step completed">Dalam Proses<br><small>Surat sudah diterima oleh bagian Tata Usaha</small></div>
+            <div class="line"></div>
+            <div class="circle circle-top"></div>
+            <div class="circle circle-bottom"></div>
+        </div>
 
-        <label for="specialInput">Data Khusus:</label>
-        <input type="text" id="specialInput" value="-" disabled><br><br>
+        <!-- Step Terkirim, hidden by default -->
+        <div id="terkirimStep" class="step-container step-left hidden">
+            <div class="step">Dalam Proses<br><small>Surat telah diteruskan ke bagian <div id="output"></div> </small></div>
+            <div class="line"></div>
+            <div class="circle circle-top"></div>
+            <div class="circle circle-bottom"></div>
+        </div>
 
-        <button type="submit">Submit</button>
-    </form>
-
-    <script>
-        let isSubmitted = false;
-
-        function enableSpecificInput() {
-            if (!isSubmitted) {
-                // Mengaktifkan input khusus dan mencegah form terkirim saat pertama kali tombol submit ditekan
-                document.getElementById("specialInput").disabled = false;
-                isSubmitted = true; // Menandakan form telah di-submit sekali
-                return false; // Mencegah form terkirim
-            }
-            // Jika tombol submit ditekan kedua kalinya, form akan terkirim
-            return true;
-        }
-    </script>
+        <!-- Step Selesai, hidden by default -->
+        <div id="selesaiStep" class="step-container step-right hidden">
+            <div class="step">Selesai<br><small>Proses surat telah selesai</small></div>
+            <div class="circle circle-top"></div>
+        </div>
+    </div>
+    <script src="scriptFlow.js"></script>
 </body>
 </html>

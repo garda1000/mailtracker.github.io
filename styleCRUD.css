@@ -3,7 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif; /* Menggunakan font yang lebih modern */
+    font-family: Arial, sans-serif; 
   }
   iframe {
     position: absolute;
@@ -25,13 +25,13 @@ body, html {
     border: none;
     border-radius: 5px;
     z-index: 10;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
-    transition: background-color 0.3s, transform 0.2s; /* Tambahkan transisi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, transform 0.2s; 
   }
   .back-button:hover {
     background-color: #3e8e41;
-    transform: translateY(-2px); /* Efek angkat saat hover */
+    transform: translateY(-2px); 
   }
   .back-button:active {
-    transform: translateY(1px); /* Efek tekan saat diklik */
+    transform: translateY(1px); 
   }

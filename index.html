@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="spinner.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="src/11683680803.png" type="image/x-icon">
 </head>
 <body>
+    <div class="spinner" id="spinner" style="display: none;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-
     <header>
         <h1>Sistem Manajemen Surat</h1>
     </header>
-
     <nav>
-        <a href="Tracker.html">Tracking Surat</a>
-        <a href="CRUD-Data.html">Input dan Edit Surat</a>
+        <a href="Tracker.html" onclick="showLoader(event, 'Tracker.html')">Tracking Surat</a>
+        <a href="CRUD-Data.html" onclick="showLoader(event, 'CRUD-Data.html')">Input dan Edit Surat</a>
     </nav>
-
     <footer>
         &copy; 2024 Sistem Tracking Surat. All Rights Reserved.
     </footer>
-
 </body>
+<script src="scriptSpinner.js"></script>
 </html>

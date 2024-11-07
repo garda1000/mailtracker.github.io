@@ -24,13 +24,8 @@ $(document).ready(function () {
   });
 
   function lihatDetail(keterangan) {
-    // Simpan keterangan di session storage
     sessionStorage.setItem("keterangan", keterangan);
-    
-    // Set src untuk iframe tanpa parameter
     document.getElementById("modalIframe").src = "FlowSurat.html";
-    console.log(keterangan)
-    // Tampilkan modal
     $("#suratModal").modal("show");
 }
 

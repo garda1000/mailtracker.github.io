@@ -21,3 +21,27 @@
   .back-button:active {
     transform: translateY(1px);
   }
+
+  @media (max-width: 768px) {
+    h3.text-center {
+        font-size: 1.2rem;
+    }
+
+    .back-button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    #example {
+        font-size: 0.9rem;
+    }
+
+    /* Modal Responsiveness */
+    .modal-content {
+        padding: 10px;
+    }
+
+    #modalIframe {
+        height: 300px;
+    }
+}

@@ -71,36 +71,3 @@ body {
 .hidden {
     display: none;
 }
-
-@media (max-width: 768px) {
-    .tracking-container {
-        width: 90%;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .step {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-
-    .step-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .line {
-        width: 100%;
-        height: 2px;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .circle {
-        position: static;
-        margin: 10px auto;
-    }
-}

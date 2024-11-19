@@ -6,6 +6,7 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="spinner.css">
+    <link rel="stylesheet" href="modal.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="src/11683680803.png" type="image/x-icon">
 </head>
@@ -22,11 +23,26 @@
     </header>
     <nav>
         <a href="Tracker.html" onclick="showLoader(event, 'Tracker.html')">Tracking Surat</a>
-        <a href="CRUD-Data.html" onclick="showLoader(event, 'CRUD-Data.html')">Input dan Edit Surat</a>
+        <a href="#" onclick="showPasswordModal()">Input dan Edit Surat</a>
     </nav>
+
+    <!-- Modal Password -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <h2>Akses Terbatas</h2>
+            <p>Masukkan password untuk melanjutkan</p>
+            <input type="password" id="passwordInput" placeholder="Password" />
+            <div class="modal-buttons">
+                <button onclick="validatePassword()">Submit</button>
+                <button onclick="closePasswordModal()">Cancel</button>
+            </div>
+            <p id="errorMsg" class="error-message"></p>
+        </div>
+    </div>
+
     <footer>
         &copy; 2024 Sistem Tracking Surat. All Rights Reserved.
     </footer>
 </body>
-<script src="scriptSpinner.js"></script>
+<script src="script.js"></script>
 </html>

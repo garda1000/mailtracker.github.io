@@ -1,35 +1,44 @@
-function showLoader(event, url) {
-    if (event) event.preventDefault();
-    document.getElementById('spinner').style.display = 'block';
+let correctPassword = ""; 
+function fetchPassword() {
+    const url = "https://script.google.com/macros/s/AKfycbxFZ8wBZxbEacBLp_G4IC-lPiLNqrqjKpgupzhwqrYHibRTQlxrhk3YjjzYLeri3DG8Dg/exec";
 
-    setTimeout(() => {
-        window.location.href = url;
-    }, 2000);
-}
-window.addEventListener('load', () => {
-    const spinner = document.getElementById('spinner');
-    setTimeout(() => {
-        spinner.style.display = 'none';
-    }, 1000); // Spinner hilang setelah 1 detik
-});
-
-function showPasswordModal() {
-    document.getElementById('passwordModal').style.display = 'flex';
-    document.getElementById('errorMsg').textContent = ""; // Reset pesan error
-}
-
-function closePasswordModal() {
-    document.getElementById('passwordModal').style.display = 'none';
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Data received from Google Apps Script:", data);
+            
+            if (data && data.data && data.data[0] && data.data[0].password) {
+                correctPassword = data.data[0].password; 
+                console.log("Password fetched:", correctPassword);
+            } else {
+                console.error("Password not found in the response!");
+                alert("Error: Password not found in the response.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching password:", error);
+            alert("Error fetching password: " + error.message);
+        });
 }
 
 function validatePassword() {
-    const password = document.getElementById('passwordInput').value;
-    const correctPassword = "disperindag123";
+    const enteredPassword = document.getElementById("passwordInput").value;
 
-    if (password === correctPassword) {
-        closePasswordModal();
-        showLoader(null, "CRUD-Data.html");
+    if (enteredPassword === correctPassword) {
+        window.location.href = "CRUD-Data.html"; 
     } else {
-        document.getElementById('errorMsg').textContent = "❌ Password salah. Coba lagi!";
+        alert("Incorrect password, please try again!");
     }
 }
+
+
+function openModal() {
+    document.getElementById("passwordModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("passwordModal").style.display = "none";
+    document.getElementById("errorMessage").textContent = ""; 
+}
+
+window.addEventListener("load", fetchPassword);

@@ -1,4 +1,4 @@
-// Ambil data dari sessionStorage
+
 const keterangan = sessionStorage.getItem("keterangan");
 const lastUpdate = sessionStorage.getItem("LastUpdate");
 const tanggal = sessionStorage.getItem("tanggal");

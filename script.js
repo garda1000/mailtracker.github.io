@@ -25,6 +25,7 @@ function validatePassword() {
     const enteredPassword = document.getElementById("passwordInput").value;
 
     if (enteredPassword === correctPassword) {
+        closeModal();
         window.location.href = "CRUD-Data.html"; 
     } else {
         alert("Incorrect password, please try again!");

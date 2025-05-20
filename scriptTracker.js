@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#example").DataTable({
+        // <!-- ganti dengan link appscipt anda -->
         ajax: "https://script.google.com/macros/s/AKfycbwhnYqEH-nSJZhGdIIl_mXDJeRRXpYgzUizfcNRusUkHwJY3Y8UtdAqMJ2ZxtWxVjzRYg/exec",
         columns: [
             { title: "NOMOR", data: "NOMOR" },

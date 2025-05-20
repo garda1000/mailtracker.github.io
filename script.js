@@ -1,5 +1,6 @@
 let correctPassword = ""; 
 function fetchPassword() {
+    // <!-- ganti dengan link appscipt anda -->
     const url = "https://script.google.com/macros/s/AKfycbxFZ8wBZxbEacBLp_G4IC-lPiLNqrqjKpgupzhwqrYHibRTQlxrhk3YjjzYLeri3DG8Dg/exec";
 
     fetch(url)
@@ -28,10 +29,10 @@ function validatePassword() {
         closeModal();
         window.location.href = "CRUD-Data.html"; 
     } else {
-        alert("Incorrect password, please try again!");
+      errorMessage.innerText = "Password salah. Silakan coba lagi.";
+      errorMessage.style.display = "block";
     }
 }
-
 
 function openModal() {
     document.getElementById("passwordModal").style.display = "flex";
